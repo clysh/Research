@@ -1,0 +1,127 @@
+# Language: R
+# Compiled in RStudio
+# Used for data analysis, statistical testing, and boxplot/graph making
+# Coded by C.Y. and J.A.
+# Presented at UWBBRS
+
+#clear out previous data
+ls()
+rm(list=ls())
+
+#install necessary packages
+install.packages(c("tidyverse","googlesheets4", "dplyr", “ggpubr”))
+library(googlesheets4)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(ggpubr)
+
+#read sheet and load in
+Dat.Comp <- read_sheet("1KPsGiq6F2BRDqLWsO17vCaMvITAICyujoHEdxr7Zj98")
+
+#ratio of germinated to nongerminated (didn’t really use this)
+only.germdate <- select(Dat.Comp, matches("GerminationDate"))
+only.germdat <- na.omit(only.germdate)
+summary(only.germdat)
+Num.allgermed <- length(only.germdat[[1]])
+Num.total <- length(only.germdate[[1]])
+PercentGerminated <- Num.allgermed/Num.total*100
+cat("Total trials:", Num.total, "Total germinated:", Num.allgermed)
+cat("Total percent germinated:", PercentGerminated,"%")
+
+#death data
+DeathData <- subset(Dat.Comp, select=c("Treatment1","Treatment2","DeathDate"))
+DeathData <- drop_na(DeathData)
+
+#histograms and subsetted histograms on germination date of different treatments
+library(tidyr)
+library(ggplot2)
+germdat <- subset(Dat.Comp, select=c("Treatment1","Treatment2","GerminationDate"))
+cleangermdat <- unite(germdat, col="Treatment", c("Treatment1","Treatment2"), 
+                      sep = " ", remove=TRUE, na.rm=TRUE)
+cleangermdat <- na.omit(cleangermdat)
+ggplot(cleangermdat,aes(x=GerminationDate, fill=Treatment)) +
+  labs(x="Germination Date", title="Germinations per Date for All Treatments")+
+  geom_histogram()
+
+Droght <- subset(germdat,Treatment2=="W-")
+ggplot(Droght,aes(x=GerminationDate, fill=Treatment1)) +
+  labs(x="Germination Date", title="Germinations per Date for Drought")+
+  geom_histogram()
+
+Wate <- subset(germdat,Treatment2=="W+")
+ggplot(Wate,aes(x=GerminationDate, fill=Treatment1)) +
+  labs(x="Germination Date", title="Germinations per Date for Non-Drought")+
+  geom_histogram()
+
+HiMo <- subset(germdat,Treatment1=="M+")
+ggplot(HiMo,aes(x=GerminationDate, fill=Treatment2)) +
+  labs(x="Germination Date", title="Germinations per Date for Natural Moss")+
+  geom_histogram()
+
+LoMo <- subset(germdat,Treatment1=="M-")
+ggplot(LoMo,aes(x=GerminationDate, fill=Treatment2)) +
+  labs(x="Germination Date", title="Germinations per Date for Trimmed Moss")+
+  geom_histogram()
+
+NoMo <- subset(germdat,Treatment1=="NM")
+ggplot(NoMo,aes(x=GerminationDate, fill=Treatment2)) +
+  labs(x="Germination Date", title="Germinations per Date for No Moss")+
+  geom_histogram()
+
+#End Height Data with and without NAs
+EndHeightData <- subset(Dat.Comp, select=c("Treatment1","Treatment2","EndHeight"))
+cleanEndHeightData <- drop_na(EndHeightData)’
+
+#End Height Boxplots: Moss, Drought, All
+ggboxplot(cleanEndHeightData,x="Treatment1",y="EndHeight")+
+  ggtitle("Effect of Moss Treatment on End Height")+
+  labs(x="Treatment", y="End Height (cm)")
+
+ggboxplot(cleanEndHeightData,x="Treatment2",y="EndHeight")+
+  ggtitle("Effect of Drought Treatment on End Height")+
+  labs(x="Treatment", y="End Height (cm)")
+
+cleanerEndHeightData <- unite(cleanEndHeightData, col="Treatment", c("Treatment1","Treatment2"), 
+      sep = " ")
+ggboxplot(cleanerEndHeightData,x="Treatment",y="EndHeight")+
+  ggtitle("Effect of Moss and Drought Treatments on End Height")+
+  labs(x="Treatment Types", y="End Height (cm)")
+
+
+#BOXPLOTS
+#boxplot treatment 2 and germination date
+library("ggpubr")
+ggboxplot(Dat.Comp, x = "Treatment2", y = "GerminationDate")
+
+#Treatment 1 and Treatment 2 ANOVA with Germination Date
+#run a two-way anova with treatment 1 and treatment 2 against germination date
+res.aov2 <- aov(GerminationDate ~ Treatment1 * Treatment2 + Block, data = Dat.Comp)
+summary(res.aov2)
+
+# death date boxplot with treatment 1
+ggboxplot(Dat.Comp, x = "Treatment1", y = "DeathDate")+
+  ggboxplot(Dat.Comp, x = "Treament1", y = "DeathDate")+
+  ggtitle("Comparison of Moss Treatment and Death Date")+
+  xlab("Treatment1")+
+  ylab("DeathDate")
+
+# Death Date boxplot with treatment 2
+ggboxplot(Dat.Comp, x = "Treatment2", y = "DeathDate")+
+  ggboxplot(Dat.Comp, x = "Treament2", y = "DeathDate")+
+  ggtitle("Comparison of Moss Treatment and Death Date")+
+  xlab("Treatment2")+
+  ylab("DeathDate")
+
+
+#One way Anovas with summaries:
+
+#one way anova with Treatment 1 and GerminationDate
+res.aov <- aov(GerminationDate ~ Treatment1, data = Dat.Comp)
+summary(res.aov)
+
+#One way anova with treatment 2 and GerminationDate
+res.aov <- aov(GerminationDate ~ Treatment2, data = Dat.Comp)
+#Summary of one way
+summary(res.aov)
+

@@ -3,7 +3,7 @@
 
 ## Past projects: 
 ### Effect of Moss Thickness and Drought Conditions on Tree Germination
-Took height measurements and germination dates of *Pseudotsuga menziesii* grown from seed planted in varying conditions of moss thickness, which were then treated with either drought or no drought. Then, all of the data was analyzed and graphed via R. Methods used were 2-way ANOVA, boxplots, and histograms. Seedling death data was added midway through the experiment.
+Took height measurements and germination dates of *Pseudotsuga menziesii* grown from seed planted in varying levels of *Thuidium delicatulum* moss thickness, which were then treated with either drought or no drought. Then, all of the data was analyzed and graphed via R. Methods used were 2-way ANOVA, boxplots, and histograms. Seedling death data was added midway through the experiment.
 
 ## Current projects:
 ### Kokanee Salmon Fry variables in Random Forest Algorithm

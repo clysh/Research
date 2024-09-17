@@ -2,7 +2,8 @@
 # Compiled in RStudio
 # Used for data analysis, statistical testing, and boxplot/graph making
 # Coded by C.Y. and J.A.
-# Presented at UWBBRS
+# With oversight from Dr. C. Chang
+# Presented at UWB Biology Research Symposium 2023DEC
 
 #clear out previous data
 ls()

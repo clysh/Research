@@ -7,4 +7,4 @@ Took height measurements and germination dates of *Pseudotsuga menziesii* grown 
 
 ## Current projects:
 ### Kokanee Salmon Fry variables in Random Forest Algorithm
-Using kokanee salmon fry data collected from volunteers, data was cleaned up manually via Google Sheets, then put through a Random Forest algorithm to determine if any of the variables had correlations. Currently fixing issues with the code. Self-taught Random Forest.
+Using kokanee salmon fry data collected from volunteers, data was cleaned up manually via Google Sheets, then put through a Random Forest algorithm to determine if any of the variables had correlations. Currently fixing issues with the code. Currently teaching myself and trying to understand Random Forest better!

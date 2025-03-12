@@ -10,4 +10,4 @@ Took height measurements and germination dates of *Pseudotsuga menziesii* grown 
 Using kokanee salmon fry data collected from volunteers, data was cleaned up manually via Google Sheets, then put through a Random Forest algorithm to determine if any of the variables had correlations. Currently fixing issues with the code. Currently teaching myself and trying to understand Random Forest better! Coding in R using RStudio.
 
 ### Glass Cliff Phenomenon (not publicly available)
-Database is stored in GoogleSheets and uses SQL.
+Database is stored in GoogleSheets and uses SQL. Currently branching into R for more statistical and qualitative data visualization work!

@@ -1,4 +1,4 @@
-# This is a compilation of all code I used for research projects! 
+# This is a compilation of random pieces of code I used for research projects! 
 ## This only includes projects where I am either a major or sole contributor to the code. 
 
 ## Past projects: 

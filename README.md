@@ -1,5 +1,5 @@
-# This is a compilation of random pieces of code I used for research projects! 
-## This only includes projects where I am either a major or sole contributor to the code. 
+This is a compilation of random pieces of code I used for research projects! 
+This only includes projects where I am either a major or sole contributor to the code. 
 
 ## Past projects: 
 ### Effect of Moss Thickness and Drought Conditions on Tree Germination
